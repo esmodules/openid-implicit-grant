@@ -12,9 +12,9 @@ This is a basic, small, lightweight client that does the following
 
 The library does not implement any state management. You need to implement this yourself.
 
-relies on localStorage for state for the claims, and sessionStorage for temporary state for the nonce and state parameters required in the authorisation URL.
+The library implements validate of the `state` and `nonce` of the request and `id_token` return from the OpenID provider.
 
-You will need to implement your own state for the OpenID auth options. This library _does not validate the JWT_ returned using Implicit Grant. It is recommended this is done server side by whatever service your app is using.
+This library _does not validate the JWT_ returned using Implicit Grant. It is recommended this is done server side by whatever service your app is using.
 
 ## Basic usage
 
