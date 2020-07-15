@@ -27,7 +27,7 @@ const callback = (hashString, { state, nonce }) => {
 
   if (state === authResponse.state) {
     const decodedIdToken = parseJWT(authResponse.id_token)
-    console.log(decodedIdToken)
+
     if (nonce === decodedIdToken.nonce) {
       const idToken = authResponse.id_token
         ? {
@@ -45,7 +45,6 @@ const callback = (hashString, { state, nonce }) => {
       hashResponse = { idToken, accessToken }
     }
   }
-  console.log(JSON.stringify(hashResponse, '', 2))
   return hashResponse
 }
 
