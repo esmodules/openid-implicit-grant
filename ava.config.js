@@ -1,8 +1,8 @@
 export default {
   require: ['esm'],
-  files: ['./test/**/*.test.js'],
+  files: ['./tests/**/*.test.js'],
   cache: true,
-  concurrency: 5,
+  concurrency: 4,
   failFast: true,
   failWithoutAssertions: false,
   tap: true,

@@ -1,7 +1,12 @@
 function parseJWT (token) {
   const base64Url = token.split('.')[1]
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-  return JSON.parse(window.atob(base64))
+  const decodedBase64 =
+    typeof window !== 'undefined'
+      ? JSON.parse(window.atob(base64))
+      : JSON.parse(Buffer.from(base64, 'base64').toString('utf-8'))
+
+  return decodedBase64
 }
 
 function parseResponse (hashArray) {
@@ -22,7 +27,7 @@ const callback = (hashString, { state, nonce }) => {
 
   if (state === authResponse.state) {
     const decodedIdToken = parseJWT(authResponse.id_token)
-
+    console.log(decodedIdToken)
     if (nonce === decodedIdToken.nonce) {
       const idToken = authResponse.id_token
         ? {
@@ -40,6 +45,7 @@ const callback = (hashString, { state, nonce }) => {
       hashResponse = { idToken, accessToken }
     }
   }
+  console.log(JSON.stringify(hashResponse, '', 2))
   return hashResponse
 }
 
